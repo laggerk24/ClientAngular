@@ -1,4 +1,8 @@
 export interface Users{
     id:number,
-    name:string
+    userName:string
+}
+export interface User{
+    username:string,
+    password:string
 }

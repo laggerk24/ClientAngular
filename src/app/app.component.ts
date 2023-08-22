@@ -8,14 +8,17 @@ import { Users } from 'src/Models/models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit{
-  title = 'ClientAngular';
+  title = 'Showing Users From Db';
+  users!: Users[];
   constructor(private http:HttpClient){}
   ngOnInit(): void {
     this.getUserData();
   }
+
   getUserData(){
-    this.http.get<Users>('https://localhost:7181/api/Users').subscribe((observer)=>{
-      console.log(observer)
+    this.http.get<Users[]>('https://localhost:7181/api/Users').subscribe((observer)=>{
+      console.log('Observable Data',observer)
+      this.users = observer
     },
     (error)=>
     console.log(error),
