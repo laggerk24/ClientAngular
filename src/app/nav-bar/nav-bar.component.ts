@@ -10,16 +10,22 @@ import { AccountService } from '../_services/account.service';
 export class NavBarComponent {
   constructor(private account: AccountService) {}
   model: any = {};
-  loggedIn = false;
+  loggedIn!: boolean;
   login() {
     this.account.login(this.model).subscribe(
       (respone) => {
         console.log(respone);
-        this.loggedIn = true;
       },
       (error) => {
         console.log(error);
       }
     );
+    this.loggedIn = true;
+    this.model.userName='';
+    this.model.password='';
+  }
+  logout(){
+    this.loggedIn=false;
+    this.account.logout();
   }
 }
