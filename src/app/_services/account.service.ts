@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { map } from 'rxjs';
+import { ReplaySubject, map } from 'rxjs';
 import { User } from 'src/Models/models';
 
 @Injectable({
@@ -18,6 +18,9 @@ export class AccountService implements OnDestroy{
 
   baseUrl = 'https://localhost:7181/api/';
 
+  private currentUserData = new ReplaySubject<User | null>(1);
+  userData$ = this.currentUserData.asObservable();
+
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'Account/Login', model).pipe(
       map((response: User) => {
@@ -25,11 +28,18 @@ export class AccountService implements OnDestroy{
         if(user)
         {
           localStorage.setItem('user',JSON.stringify(user))
+          this.currentUserData.next(user)
         }
       })
     )
   }
   logout(){
     localStorage.removeItem('user');
+    this.currentUserData.next(null);
   }
+  
+  setCurrentUser(user:User){
+    this.currentUserData.next(user);
+  }
+
 }

@@ -48,6 +48,7 @@
             type="text"
             placeholder="userName"
             aria-label="Search"
+            required
           />
           <input
             name="password"
@@ -56,8 +57,9 @@
             type="password"
             placeholder="password"
             aria-label="Search"
+            required
           />
-          <button class="btn btn-outline-success" type="submit">Login</button>
+          <button class="btn btn-outline-success" type="submit" [disabled]="!loginForm.valid">Login</button>
         </div>
       </form>
     </ng-template>
