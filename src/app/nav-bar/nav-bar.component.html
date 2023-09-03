@@ -3,7 +3,7 @@
     <div class="navbar-collapse justify-content-center" id="navbarNav">
       <a href="#" class="navbar-brand">Dating App</a>
       <div class="container justify-content-left">
-        <ul class="navbar-nav" *ngIf="currentUser$ | async">
+        <ul class="navbar-nav" *ngIf=" account.userData$ | async">
           <li class="nav-item">
             <a class="nav-link" href="#">Matches</a>
           </li>
@@ -16,7 +16,7 @@
         </ul>
       </div>
     </div>
-    <div *ngIf="currentUser$ | async; else elseBlock" class="dropdown" dropdown>
+    <div *ngIf=" account.userData$ | async; else elseBlock" class="dropdown" dropdown>
       <button
         class="btn btn-secondary"
         dropdownToggle

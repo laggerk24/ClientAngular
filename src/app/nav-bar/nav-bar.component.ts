@@ -9,10 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  currentUser$ = new Observable<User|null>
-  constructor(private account: AccountService) {}
+  constructor(public account: AccountService) {}
   ngOnInit(): void {
-    this.currentUser$ = this.account.userData$;
   }
   model: any = {};
 
