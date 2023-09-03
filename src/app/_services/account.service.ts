@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { ReplaySubject, map } from 'rxjs';
+import { ReplaySubject, map, tap } from 'rxjs';
 import { User } from 'src/Models/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AccountService implements OnDestroy{
-
-  constructor(private http: HttpClient) { 
-    console.log("Instance of service is created");
+export class AccountService implements OnDestroy {
+  constructor(private http: HttpClient) {
+    console.log('Instance of service is created');
   }
-  
+
   ngOnDestroy(): void {
-    console.log("Account Service getting destroy");
+    console.log('Account Service getting destroy');
   }
 
   baseUrl = 'https://localhost:7181/api/';
@@ -24,22 +23,20 @@ export class AccountService implements OnDestroy{
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'Account/Login', model).pipe(
       map((response: User) => {
-        const user= response;
-        if(user)
-        {
-          localStorage.setItem('user',JSON.stringify(user))
-          this.currentUserData.next(user)
-        }
+        const user = response;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUserData.next(user);
+        console.log('Service', user);
+        return response;
       })
-    )
+    );
   }
-  logout(){
+  logout() {
     localStorage.removeItem('user');
     this.currentUserData.next(null);
   }
-  
-  setCurrentUser(user:User){
+
+  setCurrentUser(user: User) {
     this.currentUserData.next(user);
   }
-
 }
