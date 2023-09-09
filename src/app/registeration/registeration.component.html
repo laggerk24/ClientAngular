@@ -12,6 +12,13 @@
   </div>
   <br />
   <div class="form-group">
+    <label>Who is favourite user?</label>
+    <select class="form-control">
+      <option *ngFor="let user of usersFromHome " [value]="user.userName">{{user.userName | titlecase}}</option>
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
     <input
       type="text"
       type="password"

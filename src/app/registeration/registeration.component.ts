@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registeration',
   templateUrl: './registeration.component.html',
   styleUrls: ['./registeration.component.css']
 })
-export class RegisterationComponent {
+export class RegisterationComponent implements OnInit{
+  ngOnInit(): void {
+    console.log(this.usersFromHome)
+  }
+  @Input() usersFromHome:any;
   model:any = {}
   
   register(){
