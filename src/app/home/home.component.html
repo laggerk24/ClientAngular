@@ -10,7 +10,7 @@
     <ng-template #elseBlock class="container">
         <div class="row justify-content-center">
             <div class="col-4">
-                <app-registeration [usersFromHome]="users"></app-registeration>
+                <app-registeration (cancelRegister)="cancelRegisteration($event)"></app-registeration>
             </div>
         </div>
     </ng-template>

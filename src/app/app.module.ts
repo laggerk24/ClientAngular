@@ -10,13 +10,22 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
 import { RegisterationComponent } from './registeration/registeration.component';
+import { ListsComponent } from './lists/lists.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     HomeComponent,
-    RegisterationComponent
+    RegisterationComponent,
+    ListsComponent,
+    MemberListComponent,
+    MemberDetailsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,10 @@ import { RegisterationComponent } from './registeration/registeration.component'
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass:'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

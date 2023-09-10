@@ -1,22 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registeration',
   templateUrl: './registeration.component.html',
   styleUrls: ['./registeration.component.css']
 })
-export class RegisterationComponent implements OnInit{
-  ngOnInit(): void {
-    console.log(this.usersFromHome)
-  }
-  @Input() usersFromHome:any;
+export class RegisterationComponent{
+  constructor(private accountService:AccountService, private toastr:ToastrService){}
+
+  @Output() cancelRegister = new EventEmitter();
+
   model:any = {}
   
   register(){
-    console.log(this.model)
+    this.accountService.register(this.model).subscribe(response =>{
+      console.log("New User",response)
+      this.cancel();
+    },(error)=>{
+      console.log("registeration",error)
+      this.toastr.error(error.error)
+    })
   }
   cancel(){
-    console.log("cancelled")
+    this.cancelRegister.emit(false);
   }
 }
 

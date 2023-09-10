@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  constructor(private http:HttpClient){}
+  constructor(){}
   ngOnInit(): void {
-    this.getusers();
   }
 
   users:any
   register:boolean = false;
+  
   regiterToggle(){
     this.register = !this.register
   }
-  getusers()
-  {
-    this.http.get('https://localhost:7181/api/Users').subscribe(users => this.users=users)
+
+  cancelRegisteration(event:boolean){
+    this.register = event;
   }
 }
