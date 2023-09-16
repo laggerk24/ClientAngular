@@ -19,7 +19,7 @@
       </div>
     </div>
     <div
-      *ngIf="account.userData$ | async; else elseBlock"
+      *ngIf="(account.userData$ | async) as user; else elseBlock"
       class="dropdown"
       dropdown
     >
@@ -32,7 +32,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Welcome User
+        Welcome {{user.userName | titlecase}}
       </button>
       <ul
         class="dropdown-menu mt-2"
